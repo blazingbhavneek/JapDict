@@ -1,0 +1,19 @@
+[project]
+name = "japdict"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "black>=25.9.0",
+    "isort>=6.1.0",
+    "json-repair>=0.52.0",
+    "mecab-python3>=1.0.10",
+    "openai>=2.3.0",
+    "protobuf>=6.32.1",
+    "pyknp>=0.6.1",
+    "sentence-transformers>=5.1.1",
+    "sentencepiece>=0.2.1",
+    "sudachidict-full>=20250825",
+    "sudachipy>=0.6.10",
+]

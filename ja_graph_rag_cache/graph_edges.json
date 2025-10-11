@@ -1,0 +1,2493 @@
+{
+  "変電所": [
+    {
+      "target": "低圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "制御装置": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "リチウムイオン二次電池": [
+    {
+      "target": "エネルギー密度",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "二次電池",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "水素による蓄電": [
+    {
+      "target": "水素",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "設備容量": [
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "充放電": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "燃料電池": [
+    {
+      "target": "水素",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "蓄電池": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "水素システム": [
+    {
+      "target": "水素",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "揚水発電所": [
+    {
+      "target": "発電所",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "位置",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "安全性確保": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "メタン": [
+    {
+      "target": "水素",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "遠隔制御": [
+    {
+      "target": "監視",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "開閉器": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "地絡保護": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "保護",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "監視": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力システム": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "最大電力": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "制御": [
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "送電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "無効電力": [
+    {
+      "target": "電力回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "力率",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "保護": [
+    {
+      "target": "安定性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "故障": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "消費電力": [
+    {
+      "target": "集積回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "周波数": [
+    {
+      "target": "周期",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "送電": [
+    {
+      "target": "発電所",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力供給事業者": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "スマートグリッド": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力自由化": [
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高圧送電系統": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "送電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "有効電力": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬時電力": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力回路": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "力率角": [
+    {
+      "target": "力率",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬時電流": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "力率": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ピーク値": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "交流": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "正弦波交流": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬時電圧": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "角周波数": [
+    {
+      "target": "周期",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "静電容量": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電荷",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬時電流の実効値": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "遅れ無効電力": [
+    {
+      "target": "誘導性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬時電圧の実効値": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "進み無効電力": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘導性負荷": [
+    {
+      "target": "誘導性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "インピーダンス": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電気抵抗",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "容量負荷": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘導負荷": [
+    {
+      "target": "誘導性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "容量性負荷": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "アドミタンス": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "周波数",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "皮相電力": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "固有電力": [
+    {
+      "target": "内部抵抗",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "同期調相機": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "省エネルギーのためのインバータ制御機器": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "制御",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "最大電力供給条件": [
+    {
+      "target": "発電所",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "同時同量の原則": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力用コンデンサ": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高調波成分": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "マッチング": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "AC-DCコンバータ": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "外部抵抗": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "インピーダンス不整合": [
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "同軸ケーブル": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "熱エネルギーへの変換": [
+    {
+      "target": "エネルギー変換",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "素子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "輻射抵抗": [
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "放射抵抗": [
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "アンテナのインピーダンス": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "定格": [
+    {
+      "target": "安定",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "分布定数線路": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "共振周波数": [
+    {
+      "target": "周波数",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "共振状態": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高周波電流": [
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "単位長あたりのキャパシタンス": [
+    {
+      "target": "キャパシタンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー変換": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "平行線路": [
+    {
+      "target": "同軸ケーブル",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "特性インピーダンス": [
+    {
+      "target": "同軸ケーブル",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "分布定数回路": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "同軸ケーブル",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "LC直列回路": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "高周波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "回路": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "コイル": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "音響インピーダンス": [
+    {
+      "target": "体積",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "機械インピーダンス": [
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "質量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電磁波": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "キャパシタ": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "波動": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "複素数表現": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電気インピーダンス": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "減衰": [
+    {
+      "target": "波動",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "自由エネルギー": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "運動エネルギー": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "質量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "運動量": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "質量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "位置エネルギー": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "位置",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "質量": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "固有値": [
+    {
+      "target": "量子力学",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "力学系": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "力学的エネルギー保存則": [
+    {
+      "target": "力学的エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ポテンシャル": [
+    {
+      "target": "位置エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "力学的エネルギー": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "運動エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "状態ベクトル": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "量子力学",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー": [
+    {
+      "target": "力学系",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "透磁率": [
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー固有値": [
+    {
+      "target": "定常状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "量子力学",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "表面": [
+    {
+      "target": "空間",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "磁場": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "領域": [
+    {
+      "target": "空間",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー密度": [
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "位置エネルギー演算子": [
+    {
+      "target": "位置エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電束密度": [
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "マクスウェルの方程式": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ジュール熱": [
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電荷",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電率": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "熱": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "熱的": [
+    {
+      "target": "低温",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電場": [
+    {
+      "target": "電荷",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ハミルトニアン": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電流密度": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "磁束密度": [
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "位置演算子": [
+    {
+      "target": "位置",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電磁場": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電荷",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電気エネルギー": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ポインティング・ベクトル": [
+    {
+      "target": "電磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "熱エネルギー": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "熱",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "化学エネルギー": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "系統連系": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "周波数調整": [
+    {
+      "target": "周波数",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "安定性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー_efficiency": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "変換効率": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エネルギー効率": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バイオマス発電": [
+    {
+      "target": "熱",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "助成金": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "伝達可能な証書": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高効率エネルギーシステム": [
+    {
+      "target": "エネルギー変換",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "RPS法": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力会社": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "RPS相当量": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電力料金": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "証券化": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "プレミアム": [
+    {
+      "target": "グリーン電力証書",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "環境付加価値 (EAV)": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "クォータ制": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "再生可能エネルギー発電事業者": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "グリーン電力証書": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "コンデンサ": [
+    {
+      "target": "静電容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電圧": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "キャパシタンス": [
+    {
+      "target": "静電容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "ファラド",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電体": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電率",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ガラス": [
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "瞬間的な電流の変化": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "応答速度": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ファラド": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "静電容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘導体": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "静電エネルギー": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "平行板コンデンサ": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電極": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電気伝導体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "極板": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電気伝導体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘導": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "磁場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "絶縁": [
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高周波": [
+    {
+      "target": "電磁波",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電流": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電気伝導体": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電吸収": [
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電効果": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高誘電率系セラミックコンデンサ": [
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "化学処理": [
+    {
+      "target": "表面",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電体層": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "サリチル酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "安息香酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "逆極性接続": [
+    {
+      "target": "電極",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "アジピン酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "ホウ酸",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "N.P.": [
+    {
+      "target": "位置",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "極性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電極",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "極性がない": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "極性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電源平滑用": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ホウ酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "誘電体膜": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電解質": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "容量": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "極性": [
+    {
+      "target": "電場",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "交流回路": [
+    {
+      "target": "回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "マレイン酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "ホウ酸",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "アジピン酸",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "酸化被膜": [
+    {
+      "target": "電極",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ESL": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "極性",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "フタル酸": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電解液": [
+    {
+      "target": "電解質",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "酸化ニオブコンデンサ": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "発熱": [
+    {
+      "target": "ショート",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ショート": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "負極側": [
+    {
+      "target": "電極",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ヒューズ": [
+    {
+      "target": "保護",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "可変雾母コンデンサ": [
+    {
+      "target": "回転軸",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "可変コンデンサ": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バリアブルコンデンサ": [
+    {
+      "target": "回転軸",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "グランドプレーン": [
+    {
+      "target": "位置",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "プリント基板",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電源ライン": [
+    {
+      "target": "エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "逆電圧": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ゲートのインピーダンス": [
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "電界効果トランジスタ": [
+    {
+      "target": "MOSFET",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "インピーダンス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "接地点": [
+    {
+      "target": "接地",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "クロック周波数": [
+    {
+      "target": "周波数",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "直流抵抗値": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "接合型FET": [
+    {
+      "target": "MOSFET",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "CMOS": [
+    {
+      "target": "集積回路",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "交流成分": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ゲートの静電容量": [
+    {
+      "target": "静電容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電界効果トランジスタ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "コア数": [
+    {
+      "target": "コンデンサ",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "寄生容量": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バリキャップ": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "容量性": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バリコン": [
+    {
+      "target": "容量",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "静電気": [
+    {
+      "target": "粒子",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "共振回路": [
+    {
+      "target": "周波数",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "空乏層": [
+    {
+      "target": "絶縁",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "領域",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "静電誘導": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘導",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "増幅回路": [
+    {
+      "target": "安定",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "エレクトレット": [
+    {
+      "target": "電極",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "誘電体",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バイオマス発電所": [
+    {
+      "target": "発電所",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "バイオマス",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "火力発電": [
+    {
+      "target": "燃焼",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "バイオマス": [
+    {
+      "target": "燃焼",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "燃焼方式": [
+    {
+      "target": "燃焼",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "熱",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "持続可能な森林管理": [
+    {
+      "target": "保護",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "燃焼": [
+    {
+      "target": "熱",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "木質バイオマス発電": [
+    {
+      "target": "バイオマス発電",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "固定価格買い取り制度 (FIT制度)": [
+    {
+      "target": "再生可能エネルギー",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "固定価格買い取り制度",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相3線式": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "低圧": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相変圧器": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "安定",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "ニュートラル": [
+    {
+      "target": "接地",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "単相": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三線式": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "基準電位": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "四線式": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相四线式": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相4線式": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "Δ結線": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高圧配電": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相": [
+    {
+      "target": "状態",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "低圧配電(Low Tension Distribution)": [
+    {
+      "target": "低圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "Y結線": [
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "高圧配電線路": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "低圧配電線": [
+    {
+      "target": "電力",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "三相交流": [
+    {
+      "target": "交流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    },
+    {
+      "target": "電流",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ],
+  "特別高圧": [
+    {
+      "target": "電圧",
+      "type": "PARENT_TERM",
+      "weight": 1.0
+    }
+  ]
+}
