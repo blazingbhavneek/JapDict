@@ -48,9 +48,9 @@ except ImportError:
 
 # Configuration constants
 TERM_FOLDER = "./terms"
-WORKING_DIR = "./ja_graph_rag_cache"
-CACHE_DIR = "./ja_graph_rag_cache/processing_cache"
-VECTOR_DB_DIR = "./ja_graph_rag_cache/vector_db"
+WORKING_DIR = "./ja_graph_rag_cache_3"
+CACHE_DIR = WORKING_DIR + "/processing_cache"
+VECTOR_DB_DIR = WORKING_DIR + "/vector_db"
 MAX_TOKEN = 5120
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 200
@@ -391,10 +391,77 @@ JSONオブジェクトのみを出力してください。
         print(f"✗ Term discovery parse error: {e}")
         return []
 
+async def discover_compound_terms(chunk_text: str, tokens: List[Dict[str, str]]) -> List[str]:
+    """
+    Discover compound technical terms (multi-noun phrases with specialized meaning).
+    """
+    # Extract consecutive noun sequences (2-4 nouns)
+    compound_candidates = []
+    current_compound = []
+    
+    for token in tokens:
+        if "名詞" in token.get("pos", ""):
+            current_compound.append(token["surface"])
+        else:
+            if len(current_compound) >= 2:
+                compound_candidates.append("".join(current_compound))
+            current_compound = []
+    
+    # Don't forget the last compound
+    if len(current_compound) >= 2:
+        compound_candidates.append("".join(current_compound))
+    
+    # Remove duplicates and filter out very long compounds (>15 chars usually not technical)
+    compound_candidates = list(set([c for c in compound_candidates if 2 <= len(c) <= 15]))
+    
+    if not compound_candidates:
+        return []
+    
+    # Ask LLM to filter for actual technical compounds
+    prompt = f"""
+以下の候補から、電力システムに関連する複合技術用語のみを抽出してください。
+
+複合技術用語の条件:
+- 2つ以上の名詞が組み合わさった用語
+- 個別の名詞とは異なる専門的意味を持つ
+- 電力システムの制御・監視・保護に関連
+- 例: 個別制御、遠隔監視、周波数調整、地絡保護
+
+除外すべきもの:
+- 一般的な名詞の単純な組み合わせ（例：機器設定、データ表示）
+- 文脈依存の表現（例：前回実施、次回確認）
+
+候補: {json.dumps(compound_candidates, ensure_ascii=False)}
+
+テキスト断片（参考用）:
+{chunk_text[:500]}
+
+出力形式: {{"terms": ["用語1", "用語2"]}}
+JSONオブジェクトのみを出力してください。
+"""
+    
+    system_prompt = """
+あなたは電力システム分野の複合技術用語抽出の専門家です。
+複合語として意味を持つ技術用語のみを抽出してください。
+"""
+    
+    response = await vllm_complete(prompt, system_prompt)
+    
+    if not response:
+        return []
+    
+    try:
+        result = json_repair.loads(response)
+        if isinstance(result, dict) and "terms" in result and isinstance(result["terms"], list):
+            return [str(t).strip() for t in result["terms"] if str(t).strip()]
+        return []
+    except Exception as e:
+        print(f"✗ Compound term discovery parse error: {e}")
+        return []
+
 async def filter_technical_terms(chunk_text: str, candidate_terms: List[str]) -> List[str]:
     """Filter which terms are actually power-system technical"""
     if not candidate_terms:
-        # Return empty list if no candidates to filter
         return []
 
     prompt = f"""
@@ -427,28 +494,26 @@ async def filter_technical_terms(chunk_text: str, candidate_terms: List[str]) ->
 出力形式: {{"terms": ["用語1", "用語2"]}}
 JSONオブジェクトのみを出力してください。
 """
-    # Note: system_prompt was missing for filter_technical_terms, adding it
+    
     system_prompt = """
 あなたは日本語の電力システム技術文書における専門用語フィルタリングのプロフェッショナルです。
 与えられた候補用語リストから、電力システムに関連する技術用語のみを抽出してください。
 "terms"キーを持つ有効なJSONオブジェクトのみを出力してください。
 """
+    
     response = await vllm_complete(prompt, system_prompt)
     if not response:
-        # Return empty list if LLM response is empty
         return []
+    
     try:
         result = json_repair.loads(response)
         if isinstance(result, dict) and "terms" in result and isinstance(result["terms"], list):
-            # Ensure the items in the list are strings and strip whitespace
             filtered_terms = [str(t).strip() for t in result["terms"] if str(t).strip()]
             return filtered_terms
         else:
-            # Return empty list if response format is unexpected
             return []
     except Exception as e:
         print(f"✗ Filter terms parse error: {e}")
-        # Return empty list if parsing fails
         return []
 
 
@@ -721,7 +786,7 @@ class DefinitionAggregator:
 定義断片:
 {defs_formatted}
 
-出力形式: {{definition: <統合された定義>}}
+出力形式: {{"definition": "<統合された定義>"}}
 
 JSONオブジェクトのみを出力してください。
 """
@@ -775,7 +840,7 @@ JSONオブジェクトのみを出力してください。
 3. 複合用語が実現する機能・目的を前面に出す
 4. 例がある場合は簡潔に含める
 
-出力形式: {{definition: <複合用語の統合定義>}}
+出力形式: {{"definition": "<複合用語の統合定義>"}}
 
 JSONオブジェクトのみを出力してください。
 """
@@ -861,7 +926,7 @@ class GraphManager:
         if not self.nodes or term not in self.nodes:
             return {"found": False, "query_term": term}
         
-        visited = set([(term, 0)])
+        visited_terms = set()
         queue = [(term, 0)]
         related_nodes = {}
         related_edges = []
@@ -869,14 +934,20 @@ class GraphManager:
         while queue:
             current_term, depth = queue.pop(0)
             
-            if (current_term, depth) in visited or depth > max_depth:
+            # Skip if already visited or exceeds max depth
+            if current_term in visited_terms or depth > max_depth:
                 continue
             
-            visited.add((current_term, depth))
-            related_nodes[current_term] = self.nodes[current_term]
+            # Mark as visited and add to results
+            visited_terms.add(current_term)
+            if current_term in self.nodes:
+                related_nodes[current_term] = self.nodes[current_term]
             
+            # Process edges from current term
             for edge in self.edges.get(current_term, []):
                 target = edge["target"]
+                
+                # Add edge to results
                 related_edges.append({
                     "source": current_term,
                     "target": target,
@@ -884,7 +955,8 @@ class GraphManager:
                     "weight": edge["weight"]
                 })
                 
-                if (target, depth + 1) not in visited and depth + 1 <= max_depth:
+                # Add target to queue if not visited and within depth limit
+                if target not in visited_terms and depth + 1 <= max_depth:
                     queue.append((target, depth + 1))
         
         return {
@@ -906,7 +978,7 @@ class GraphManager:
         with open(edges_path, "w", encoding="utf-8") as f:
             json.dump(dict(self.edges), f, indent=2, ensure_ascii=False)
         
-        print(f"✓ Saved graph: {len(self.nodes)} nodes")
+        print(f"✓ Saved graph: {len(self.nodes)} nodes, {sum(len(v) for v in self.edges.values())} edges")
     
     def load(self) -> bool:
         """Load graph data"""
@@ -923,7 +995,7 @@ class GraphManager:
             edges_data = json.load(f)
             self.edges = defaultdict(list, {k: v for k, v in edges_data.items()})
         
-        print(f"✓ Loaded graph: {len(self.nodes)} nodes")
+        print(f"✓ Loaded graph: {len(self.nodes)} nodes, {sum(len(v) for v in self.edges.values())} edges")
         return True
 
 # Dictionary manager
@@ -1007,8 +1079,13 @@ class ChunkProcessor:
         llm_terms = set(await discover_technical_terms(chunk_text))
         print(f"+ LLM found {len(llm_terms)} new terms")
         
+        # Discover compound terms
+        print("+ Discovering compound technical terms...")
+        compound_terms = set(await discover_compound_terms(chunk_text, tokens))
+        print(f"+ Found {len(compound_terms)} compound terms")
+        
         # Filter all candidate terms
-        all_candidate_terms = list(set(matched_terms) | llm_terms)
+        all_candidate_terms = list(set(matched_terms) | llm_terms | compound_terms)
         if all_candidate_terms:
             print("+ Filtering candidate terms with LLM...")
             filtered_terms = set(await filter_technical_terms(chunk_text, all_candidate_terms))
@@ -1029,7 +1106,8 @@ class ChunkProcessor:
             "chunk_id": chunk_id,
             "terms": list(definitions.keys()),
             "definitions": definitions,
-            "partial_matches": partial_matches
+            "partial_matches": partial_matches,
+            "compound_terms": list(compound_terms & filtered_terms)
         }
     
     async def _generate_definitions_concurrent(self, terms: List[str], 
@@ -1174,8 +1252,23 @@ class AdaptiveDictionaryBuilder:
                         term, definition, result["chunk_id"]
                     )
                     
-                    # Detect compound relationships
-                    if added and term in result["partial_matches"]:
+                    # For compound terms, try to decompose and link to components
+                    if added and term in result.get("compound_terms", []):
+                        # Tokenize the term itself to find component nouns
+                        term_tokens = self.tokenizer.tokenize(term)
+                        components = [t["surface"] for t in term_tokens if "名詞" in t.get("pos", "")]
+                        
+                        # Link to component terms that have definitions
+                        for component in components:
+                            if component != term and component in aggregator.fragments:
+                                component_def = aggregator.fragments[component][0]
+                                aggregator.add_partial_info(
+                                    term, component, component_def, 
+                                    result["chunk_id"]
+                                )
+                    
+                    # Also detect compound relationships from partial matches
+                    elif added and term in result["partial_matches"]:
                         # Tokenize definition to find components
                         def_tokens = self.tokenizer.tokenize(definition)
                         for token in def_tokens:
@@ -1370,11 +1463,23 @@ class QuerySystem:
     
     async def full_query(self, term: str, max_depth: int = 2) -> Dict[str, Any]:
         dict_result = self.dict_lookup(term)
+        graph_result = None
         
         if dict_result["found"]:
+            # Exact match found - query graph directly
             graph_result = self.graph.query_graph(term, max_depth=max_depth)
         else:
-            graph_result = None
+            # No exact match - try fuzzy matching
+            fuzzy_matches = dict_result.get("fuzzy_matches", [])
+            
+            if fuzzy_matches and fuzzy_matches[0]["similarity"] >= 0.1:
+                # Use best fuzzy match if similarity >= 0.1
+                best_match = fuzzy_matches[0]
+                graph_result = self.graph.query_graph(best_match["term"], max_depth=max_depth)
+                
+                # Update dict_result to indicate we're using fuzzy match
+                dict_result["used_fuzzy_match"] = best_match["term"]
+                dict_result["fuzzy_similarity"] = best_match["similarity"]
         
         return {
             "query": term,
@@ -1493,24 +1598,36 @@ async def main():
             print("✓ DEFINITION FOUND")
             print(f"Term: {dict_result['exact_match']}")
             print(f"Definition: {dict_result['definition']}")
+        elif dict_result.get("used_fuzzy_match"):
+            print("✓ FUZZY MATCH USED")
+            print(f"Query: {result['query']}")
+            print(f"Matched: {dict_result['used_fuzzy_match']} (similarity: {dict_result['fuzzy_similarity']:.2f})")
             
-            if result["graph_result"]:
-                graph = result["graph_result"]
-                if graph["found"]:
-                    print(f"\n{'-'*60}")
-                    print(f"Related Terms ({graph['total_nodes']} nodes, {graph['total_edges']} edges)")
-                    print(f"{'-'*60}")
-                    
-                    edge_types = defaultdict(list)
-                    for edge in graph["edges"]:
-                        edge_types[edge["type"]].append(edge)
-                    
-                    for edge_type in sorted(edge_types.keys()):
-                        edges = edge_types[edge_type]
-                        print(f"\n{edge_type}:")
-                        for edge in edges[:5]:
-                            print(f"  {edge['source']} → {edge['target']}")
-        else:
+            # Show definition of matched term
+            matched_def = query_system.dictionary.lookup_exact(dict_result['used_fuzzy_match'])
+            if matched_def:
+                print(f"Definition: {matched_def}")
+        
+        if result["graph_result"]:
+            graph = result["graph_result"]
+            if graph["found"] and (graph["total_nodes"] > 1 or graph["total_edges"] > 0):
+                print(f"\n{'-'*60}")
+                print(f"Related Terms ({graph['total_nodes']} nodes, {graph['total_edges']} edges)")
+                print(f"{'-'*60}")
+                
+                edge_types = defaultdict(list)
+                for edge in graph["edges"]:
+                    edge_types[edge["type"]].append(edge)
+                
+                for edge_type in sorted(edge_types.keys()):
+                    edges = edge_types[edge_type]
+                    print(f"\n{edge_type}:")
+                    for edge in edges[:10]:  # Show up to 10 edges per type
+                        print(f"  {edge['source']} → {edge['target']}")
+            else:
+                print("\nNo related terms found in graph")
+        
+        if not dict_result["found"] and not dict_result.get("used_fuzzy_match"):
             print(f"No exact match for: {dict_result['query']}")
             
             if "fuzzy_matches" in dict_result and dict_result["fuzzy_matches"]:
