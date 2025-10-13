@@ -1,0 +1,24 @@
+# Stop the container
+sudo docker stop neo4j-apoc
+
+# Remove the container
+sudo docker rm neo4j-apoc
+
+# Remove the volumes (this will reset the database)
+sudo docker volume rm neo4j_data neo4j_logs neo4j_import neo4j_conf
+
+# Create output directory
+mkdir -p ./neo4j_output/db
+
+sudo docker run \
+    --name neo4j-apoc \
+    -p 7474:7474 -p 7687:7687 \
+    -d \
+    -v ./plugins:/plugins \
+    -v ./neo4j_output/db:/var/lib/neo4j/data/databases \
+    -v neo4j_logs:/logs \
+    -v neo4j_import:/var/lib/neo4j/import \
+    -v neo4j_conf:/var/lib/neo4j/conf \
+    -e NEO4J_AUTH=neo4j/password \
+    -e NEO4JLABS_PLUGINS='["apoc"]' \
+    neo4j
