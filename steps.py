@@ -1,16 +1,17 @@
-import os
-import pandas as pd
-from pathlib import Path
-import openai
-from dotenv import load_dotenv
-from string import Template
-import httpx
 import asyncio
-from asyncio import Semaphore
 import json
-from typing import Dict, List, Any
-from json_repair import repair_json
+import os
 import re
+from asyncio import Semaphore
+from pathlib import Path
+from string import Template
+from typing import Any, Dict, List
+
+import httpx
+import openai
+import pandas as pd
+from dotenv import load_dotenv
+from json_repair import repair_json
 
 # Switch between clients by changing this variable
 USE_VLLM = True  # Set to False to use OpenAI (ChatGPT) client
@@ -19,7 +20,13 @@ semaphore = Semaphore(MAX_CONCURRENCY)
 
 
 class LLMClient:
-    def __init__(self, model: str = None, temperature: float = None, max_tokens: int = 1000, endpoint_env: str = None):
+    def __init__(
+        self,
+        model: str = None,
+        temperature: float = None,
+        max_tokens: int = 1000,
+        endpoint_env: str = None,
+    ):
         load_dotenv()
         if model is None:
             model = "kaitchup/Phi-4-AutoRound-GPTQ-4bit" if USE_VLLM else "gpt-4o-mini"
@@ -38,10 +45,16 @@ class LLMClient:
             openai.api_key = os.getenv("AOAI_API_KEY")
             openai.api_version = os.getenv("AOAI_API_VERSION")
 
-    async def make_generic_request_with_prompt(self, system_content: str, user_content: str, extra_body: dict = None, **filtered_kwargs) -> str:
+    async def make_generic_request_with_prompt(
+        self,
+        system_content: str,
+        user_content: str,
+        extra_body: dict = None,
+        **filtered_kwargs,
+    ) -> str:
         messages = [
             {"role": "system", "content": system_content},
-            {"role": "user", "content": user_content}
+            {"role": "user", "content": user_content},
         ]
         async with semaphore:
             if self.is_vllm:
@@ -50,20 +63,23 @@ class LLMClient:
                     "messages": messages,
                     "temperature": self.temperature,
                     "max_tokens": self.max_tokens,
-                    **filtered_kwargs
+                    **filtered_kwargs,
                 }
                 async with httpx.AsyncClient(timeout=300.0) as client:
-                    response = await client.post(f"{self.base_url}/v1/chat/completions", json=payload)
+                    response = await client.post(
+                        f"{self.base_url}/v1/chat/completions", json=payload
+                    )
                     response.raise_for_status()
                     return response.json()["choices"][0]["message"]["content"]
             else:  # OpenAI
+
                 def sync_openai_call():
                     response = openai.ChatCompletion.create(
                         engine=self.model,
                         messages=messages,
                         max_tokens=self.max_tokens,
                         temperature=self.temperature,
-                        **filtered_kwargs
+                        **filtered_kwargs,
                     )
                     return response.choices[0].message.content
 
@@ -87,18 +103,18 @@ class DocumentMatcher:
         if not os.path.exists(self.review_excel_file):
             raise FileNotFoundError(f"Excel file not found: {self.review_excel_file}")
         try:
-            with open(self.json_file, 'r', encoding='utf-8') as f:
+            with open(self.json_file, "r", encoding="utf-8") as f:
                 self.extracted_data = json.load(f)
             self.df = pd.read_excel(
                 self.review_excel_file,
                 skiprows=12,
-                usecols='B:D',
-                sheet_name="【様式】 DRシート"
+                usecols="B:D",
+                sheet_name="【様式】 DRシート",
             )
         except Exception as e:
             print(f"Error in loading {e}")
             raise
-        print('COLUMNS OF THE HUMAN REVIEW FILE: ', self.df.columns.tolist())
+        print("COLUMNS OF THE HUMAN REVIEW FILE: ", self.df.columns.tolist())
 
     def isconvertible(self, num):
         """Check if a number is convertible to int."""
@@ -110,25 +126,31 @@ class DocumentMatcher:
 
     def get_subsection(self, row):
         """Convert Excel title to subsection number (fullwidth japanese)."""
-        title = str(row['項目'])
-        num_str = title.split('）')[1] if '）' in title else title
-        parts = num_str.split('.')
+        title = str(row["項目"])
+        num_str = title.split("）")[1] if "）" in title else title
+        parts = num_str.split(".")
         if len(parts) > 2:
-            return parts[0] + '.' + parts[1]
+            return parts[0] + "." + parts[1]
         return num_str
 
-    async def find_relevant_content(self, feedback: str, target_sub: str, page: int, extracted_data: List[Dict]) -> tuple[str, str, int]:
+    async def find_relevant_content(
+        self, feedback: str, target_sub: str, page: int, extracted_data: List[Dict]
+    ) -> tuple[str, str, int]:
         """LLM-based finder for the most relevant content chunk from extracted data based on feedback."""
         candidates = []
-        major = target_sub.split('.')[0] if '.' in target_sub else target_sub
+        major = target_sub.split(".")[0] if "." in target_sub else target_sub
 
         for i, entry in enumerate(extracted_data):
-            if entry.get('subsection_name') is None:
+            if entry.get("subsection_name") is None:
                 continue
-            entry_sub_name = entry['subsection_name']
-            entry_sub = entry_sub_name.split('）')[1] if '）' in entry_sub_name else entry_sub_name
-            entry_major = entry_sub.split('.')[0] if '.' in entry_sub else entry_sub
-            content_trunc = entry.get('content', '')[:800]
+            entry_sub_name = entry["subsection_name"]
+            entry_sub = (
+                entry_sub_name.split("）")[1]
+                if "）" in entry_sub_name
+                else entry_sub_name
+            )
+            entry_major = entry_sub.split(".")[0] if "." in entry_sub else entry_sub
+            content_trunc = entry.get("content", "")[:800]
 
             if entry_major == major:
                 candidates.append((i, entry_sub, content_trunc))
@@ -142,13 +164,22 @@ class DocumentMatcher:
                     continue
                 if len(candidates) >= 10:
                     break
-                entry_sub_name = entry.get('subsection_name')
+                entry_sub_name = entry.get("subsection_name")
                 if entry_sub_name:
-                    entry_sub = entry_sub_name.split('）')[1] if '）' in entry_sub_name else entry_sub_name
-                    content_trunc = entry.get('content', '')[:800]
+                    entry_sub = (
+                        entry_sub_name.split("）")[1]
+                        if "）" in entry_sub_name
+                        else entry_sub_name
+                    )
+                    content_trunc = entry.get("content", "")[:800]
                     candidates.append((i, entry_sub, content_trunc))
 
-        candidates_str = "\n".join([f"Candidate {j+1} (Sub: {sub}): {cont}" for j, (i, sub, cont) in enumerate(candidates)])
+        candidates_str = "\n".join(
+            [
+                f"Candidate {j+1} (Sub: {sub}): {cont}"
+                for j, (i, sub, cont) in enumerate(candidates)
+            ]
+        )
 
         pick_prompt = Template(
             """あなたは文書マッチング専門家です。
@@ -157,26 +188,27 @@ class DocumentMatcher:
             候補: $candidates_str
             最も関連する候補の番号 (1から)を出力してください。理由も簡単に。"""
         )
-        prompt = pick_prompt.safe_substitute(feedback=feedback, candidates_str=candidates_str)
+        prompt = pick_prompt.safe_substitute(
+            feedback=feedback, candidates_str=candidates_str
+        )
 
         try:
             response = await self.llm_client.make_generic_request_with_prompt(
-                system_content="出力は候補番号と簡単理由のみ。",
-                user_content=prompt
+                system_content="出力は候補番号と簡単理由のみ。", user_content=prompt
             )
-            num_match = re.search(r'(\d+)', response)
+            num_match = re.search(r"(\d+)", response)
             if num_match:
                 index = int(num_match.group(1)) - 1
                 if 0 <= index < len(candidates):
                     cand_i, sub, _ = candidates[index]
-                    full_content = extracted_data[cand_i].get('content', '')
+                    full_content = extracted_data[cand_i].get("content", "")
                     return full_content, sub, cand_i
         except Exception as e:
             print(f"Error in finding relevant content: {e}")
             # Fallback to first candidate
             if candidates:
                 cand_i, sub, _ = candidates[0]
-                full_content = extracted_data[cand_i].get('content', '')
+                full_content = extracted_data[cand_i].get("content", "")
                 return full_content, sub, cand_i
         # Ultimate fallback
         return "", "", -1
@@ -186,13 +218,14 @@ class DeepResearcher:
     """
     Analyzes human feedback to understand what errors exist and their technical context.
     """
+
     def __init__(self):
         self.llm_client = LLMClient(max_tokens=2000)
-        
+
     async def analyze_feedback(self, content: str, feedback: str) -> Dict:
         """
         Deep analysis of human feedback to understand the error.
-        
+
         Returns:
             research_report: Dict containing problem analysis
         """
@@ -224,17 +257,17 @@ $feedback
 }
 
 **重要**: 日本語で回答してください。JSON形式のみ出力。"""
-        
+
         template = Template(analyze_prompt)
         prompt = template.safe_substitute(
             content=content[:3000] if len(content) > 3000 else content,
-            feedback=feedback
+            feedback=feedback,
         )
-        
+
         try:
             response = await self.llm_client.make_generic_request_with_prompt(
                 system_content="You are an error analysis expert. Output only valid JSON in Japanese.",
-                user_content=prompt
+                user_content=prompt,
             )
             repaired = repair_json(response)
             research_report = json.loads(repaired)
@@ -247,7 +280,7 @@ $feedback
                 "location_in_content": "不明",
                 "error_types": ["不明"],
                 "affected_elements": [],
-                "needs_translation": False
+                "needs_translation": False,
             }
 
 
@@ -255,13 +288,16 @@ class RootCauseAnalyzer:
     """
     Executes 7 micro-tasks to generate validation workflows from error patterns.
     """
+
     def __init__(self):
         self.llm_client = LLMClient(max_tokens=3000)
-        
-    async def decompose_into_error_patterns(self, research_report: Dict, feedback: str) -> List[Dict]:
+
+    async def decompose_into_error_patterns(
+        self, research_report: Dict, feedback: str
+    ) -> List[Dict]:
         """
         Decompose feedback into individual error patterns (max 3).
-        
+
         Returns:
             List of error pattern descriptions
         """
@@ -294,73 +330,86 @@ $feedback
 }
 
 **日本語で回答。最大3パターンまで。JSON形式のみ出力。**"""
-        
+
         template = Template(decompose_prompt)
         prompt = template.safe_substitute(
             research_report=json.dumps(research_report, ensure_ascii=False, indent=2),
-            feedback=feedback
+            feedback=feedback,
         )
-        
+
         try:
             response = await self.llm_client.make_generic_request_with_prompt(
                 system_content="You are an error pattern decomposition expert. Output only valid JSON with max 3 patterns.",
-                user_content=prompt
+                user_content=prompt,
             )
             repaired = repair_json(response)
             result = json.loads(repaired)
             patterns = result.get("error_patterns", [])
-            
+
             # Enforce max 3 patterns
             if len(patterns) > 3:
                 patterns = patterns[:3]
-                
+
             return patterns
         except Exception as e:
             print(f"Error in decompose_into_error_patterns: {e}")
             # Fallback: create single pattern from research report
-            return [{
-                "pattern_id": 1,
-                "pattern_description": research_report.get("problem_description", "不明なエラー"),
-                "detection_focus": research_report.get("location_in_content", "文書全体")
-            }]
-    
+            return [
+                {
+                    "pattern_id": 1,
+                    "pattern_description": research_report.get(
+                        "problem_description", "不明なエラー"
+                    ),
+                    "detection_focus": research_report.get(
+                        "location_in_content", "文書全体"
+                    ),
+                }
+            ]
+
     def validate_natural_language_step(self, step: Dict) -> bool:
         """
         Check that validation step contains no code/programmatic elements.
         """
         forbidden_patterns = [
-            r'regex', r'\.find\(', r'\.get\(', r'!=', r'==', 
-            r'if\s+.*\s+then', r'SELECT', r'WHERE',
-            r'function', r'lambda', r'=>', r'\bdef\b', r'\bclass\b'
+            r"regex",
+            r"\.find\(",
+            r"\.get\(",
+            r"!=",
+            r"==",
+            r"if\s+.*\s+then",
+            r"SELECT",
+            r"WHERE",
+            r"function",
+            r"lambda",
+            r"=>",
+            r"\bdef\b",
+            r"\bclass\b",
         ]
-        
+
         full_text = f"{step.get('action', '')} {step.get('instruction', '')} {step.get('expected_output', '')}"
-        
+
         for pattern in forbidden_patterns:
             if re.search(pattern, full_text, re.IGNORECASE):
                 return False
         return True
-    
+
     def enforce_step_limit(self, steps: List[Dict], max_steps: int = 10) -> List[Dict]:
         """
         Limit to max 10 steps.
         """
         if len(steps) <= max_steps:
             return steps
-        
+
         # If over limit, truncate and warn
         print(f"Warning: Generated {len(steps)} steps, truncating to {max_steps}")
         return steps[:max_steps]
-    
+
     async def generate_validation_workflow(
-        self, 
-        error_pattern: Dict, 
-        content: str, 
-        research_report: Dict
+        self, error_pattern: Dict, content: str, research_report: Dict
     ) -> Dict:
         """
         Execute 7 micro-tasks chain and generate validation workflow.
-        
+
         Returns:
             validation_workflow: Dict with validation_steps
         """
@@ -424,41 +473,41 @@ $research_report
 - "Check if transformer_specs != null" ❌ (プログラム構文)
 
 **日本語のみ。最大10ステップ。自然言語のみ。JSON形式のみ出力。**"""
-        
+
         template = Template(micro_tasks_prompt)
         prompt = template.safe_substitute(
             error_pattern=json.dumps(error_pattern, ensure_ascii=False, indent=2),
             content=content[:2000] if len(content) > 2000 else content,
-            research_report=json.dumps(research_report, ensure_ascii=False, indent=2)
+            research_report=json.dumps(research_report, ensure_ascii=False, indent=2),
         )
-        
+
         try:
             response = await self.llm_client.make_generic_request_with_prompt(
                 system_content="You are a validation workflow generation expert. Output only valid JSON with natural language steps (max 10).",
-                user_content=prompt
+                user_content=prompt,
             )
             repaired = repair_json(response)
             result = json.loads(repaired)
             steps = result.get("validation_steps", [])
-            
+
             # Validate each step is natural language
             validated_steps = []
             for step in steps:
                 if self.validate_natural_language_step(step):
                     validated_steps.append(step)
                 else:
-                    print(f"Warning: Step {step.get('step_number')} contains programmatic elements, skipping")
-            
+                    print(
+                        f"Warning: Step {step.get('step_number')} contains programmatic elements, skipping"
+                    )
+
             # Enforce step limit
             validated_steps = self.enforce_step_limit(validated_steps, max_steps=10)
-            
+
             # Renumber steps
             for i, step in enumerate(validated_steps, 1):
-                step['step_number'] = i
-            
-            return {
-                "validation_steps": validated_steps
-            }
+                step["step_number"] = i
+
+            return {"validation_steps": validated_steps}
         except Exception as e:
             print(f"Error in generate_validation_workflow: {e}")
             # Fallback: create basic validation workflow
@@ -469,7 +518,7 @@ $research_report
                         "action": "文書内容を確認する",
                         "instruction": f"{error_pattern.get('detection_focus', '問題箇所')}を文書内で探してください。",
                         "expected_output": "該当箇所の特定",
-                        "pass_condition": "該当箇所が見つかる"
+                        "pass_condition": "該当箇所が見つかる",
                     }
                 ]
             }
@@ -517,8 +566,8 @@ async def main():
         sub_to_page = {}
         for row in matcher.df.iterrows():
             subsection = matcher.get_subsection(row[1])
-            feedback = row[1]['指摘事項 (代替案)']
-            page_tuple = matcher.isconvertible(row[1]['ページ'])
+            feedback = row[1]["指摘事項 (代替案)"]
+            page_tuple = matcher.isconvertible(row[1]["ページ"])
             page = page_tuple[1] if page_tuple[0] else 0
             if subsection not in feedback_map:
                 feedback_map[subsection] = []
@@ -530,37 +579,43 @@ async def main():
         updated_data = []
         for entry in matcher.extracted_data:
             entry_copy = entry.copy()
-            entry_copy['human_feedback'] = ""
-            entry_copy['validation_workflow_ids'] = []
+            entry_copy["human_feedback"] = ""
+            entry_copy["validation_workflow_ids"] = []
             updated_data.append(entry_copy)
 
         # Prepare list of (target_sub, feedback, page, entry_index)
         processing_tasks = []
         for target_sub, feedbacks in feedback_map.items():
             page = sub_to_page[target_sub]
-            
+
             # Try exact match first
             exact_entry = None
             entry_index = -1
             for idx, entry in enumerate(matcher.extracted_data):
-                entry_sub_name = entry.get('subsection_name')
-                entry_sub = entry_sub_name.split('）')[1] if entry_sub_name and '）' in entry_sub_name else entry_sub_name
+                entry_sub_name = entry.get("subsection_name")
+                entry_sub = (
+                    entry_sub_name.split("）")[1]
+                    if entry_sub_name and "）" in entry_sub_name
+                    else entry_sub_name
+                )
                 if entry_sub == target_sub:
                     exact_entry = entry
                     entry_index = idx
                     break
-            
+
             for feedback in feedbacks:
                 if not feedback or not str(feedback).strip():
                     continue
-                    
-                processing_tasks.append({
-                    'target_sub': target_sub,
-                    'feedback': feedback,
-                    'page': page,
-                    'exact_entry': exact_entry,
-                    'entry_index': entry_index
-                })
+
+                processing_tasks.append(
+                    {
+                        "target_sub": target_sub,
+                        "feedback": feedback,
+                        "page": page,
+                        "exact_entry": exact_entry,
+                        "entry_index": entry_index,
+                    }
+                )
 
         print(f"Found {len(processing_tasks)} feedback items to process\n")
 
@@ -569,69 +624,87 @@ async def main():
             print(f"Processing feedback {task_idx}/{len(processing_tasks)}")
             print(f"  Subsection: {task['target_sub']}")
             print(f"  Feedback: {task['feedback'][:100]}...")
-            
+
             # Get content
-            if task['exact_entry'] and task['exact_entry'].get('content') and \
-               task['exact_entry']['content'].strip() not in ["The page number is not defined", "No matching content found"]:
-                content = task['exact_entry']['content']
-                entry_index = task['entry_index']
+            if (
+                task["exact_entry"]
+                and task["exact_entry"].get("content")
+                and task["exact_entry"]["content"].strip()
+                not in ["The page number is not defined", "No matching content found"]
+            ):
+                content = task["exact_entry"]["content"]
+                entry_index = task["entry_index"]
             else:
                 content, _, entry_index = await matcher.find_relevant_content(
-                    task['feedback'], 
-                    task['target_sub'], 
-                    task['page'], 
-                    matcher.extracted_data
+                    task["feedback"],
+                    task["target_sub"],
+                    task["page"],
+                    matcher.extracted_data,
                 )
-            
-            if not content or content.strip() in ["The page number is not defined", "No matching content found", ""]:
+
+            if not content or content.strip() in [
+                "The page number is not defined",
+                "No matching content found",
+                "",
+            ]:
                 print("  ⚠ No valid content found, skipping")
                 continue
-            
+
             # Step 1: Deep Research
             print("  → Deep Research...")
-            research_report = await researcher.analyze_feedback(content, task['feedback'])
-            
+            research_report = await researcher.analyze_feedback(
+                content, task["feedback"]
+            )
+
             # Step 2: Decompose into error patterns
             print("  → Decomposing error patterns...")
-            error_patterns = await analyzer.decompose_into_error_patterns(research_report, task['feedback'])
+            error_patterns = await analyzer.decompose_into_error_patterns(
+                research_report, task["feedback"]
+            )
             print(f"  → Found {len(error_patterns)} error pattern(s)")
-            
+
             # Step 3: Generate validation workflow for each pattern
             for pattern_idx, pattern in enumerate(error_patterns, 1):
-                print(f"    → Generating workflow for pattern {pattern_idx}/{len(error_patterns)}...")
-                
+                print(
+                    f"    → Generating workflow for pattern {pattern_idx}/{len(error_patterns)}..."
+                )
+
                 workflow = await analyzer.generate_validation_workflow(
                     error_pattern=pattern,
                     content=content,
-                    research_report=research_report
+                    research_report=research_report,
                 )
-                
+
                 # Assign rule_id
                 rule_id = f"RULE_{rule_counter:03d}"
                 rule_counter += 1
-                
-                workflow['rule_id'] = rule_id
+
+                workflow["rule_id"] = rule_id
                 rules_library.append(workflow)
-                
+
                 # Link to chunk
                 if entry_index >= 0:
-                    updated_data[entry_index]['validation_workflow_ids'].append(rule_id)
-                    if not updated_data[entry_index]['human_feedback']:
-                        updated_data[entry_index]['human_feedback'] = task['feedback']
-                
-                print(f"      ✓ Generated {rule_id} with {len(workflow['validation_steps'])} steps")
-            
+                    updated_data[entry_index]["validation_workflow_ids"].append(rule_id)
+                    if not updated_data[entry_index]["human_feedback"]:
+                        updated_data[entry_index]["human_feedback"] = task["feedback"]
+
+                print(
+                    f"      ✓ Generated {rule_id} with {len(workflow['validation_steps'])} steps"
+                )
+
             print()
 
         # Save the updated JSON for this pair (chunks with workflow IDs)
-        output_json_path = output_folder / f"chunks_with_workflow_ids_{json_file.stem}.json"
-        with open(output_json_path, 'w', encoding='utf-8') as f:
+        output_json_path = (
+            output_folder / f"chunks_with_workflow_ids_{json_file.stem}.json"
+        )
+        with open(output_json_path, "w", encoding="utf-8") as f:
             json.dump(updated_data, f, ensure_ascii=False, indent=2)
         print(f"✓ Saved chunks with workflow IDs to: {output_json_path}\n")
 
     # Save the global rules library (standalone validation workflows)
     rules_library_path = output_folder / "validation_workflows_library.json"
-    with open(rules_library_path, 'w', encoding='utf-8') as f:
+    with open(rules_library_path, "w", encoding="utf-8") as f:
         json.dump(rules_library, f, ensure_ascii=False, indent=2)
     print(f"\n{'='*60}")
     print(f"✓ Saved validation workflows library to: {rules_library_path}")
