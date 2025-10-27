@@ -1,0 +1,2 @@
+1157a19438d4126dadb3adfb2880567995701ab5 113804152 power_system_dictionary.json
+25acf743de0f6baf9bb377088608ed47b78101b0 113779508 power_system_dictionary_high_quality.json
